@@ -5,9 +5,35 @@ const isLetter = function (char){
 }
 
 const shiftLetter = function (char, shift){
-    if (shift + char.charCodeAt() >)
-    const utfOffset = (char.toUpperCase() === char) ? 64 : 96;
-    const newChar = String.fromCharCode((char.charCodeAt(0)+shift-utfOffset)%26+utfOffset);
+    const charCode = char.charCodeAt(0);
+    let newCharCode = charCode + shift;
+    // if it's upper case
+    if (char.toUpperCase() === char){
+        if (shift >= 0){
+            while (newCharCode > 90){
+                newCharCode -= 26;
+            }
+        } else {
+            while (newCharCode < 65){
+                newCharCode += 26;
+            }
+        }
+    } 
+    // if it's lower case
+    else {
+        if (shift >= 0){
+            while (newCharCode > 122){
+                newCharCode -= 26;
+            }
+        } else {
+            while (newCharCode < 97){
+                newCharCode += 26;
+            }
+        }
+    }
+    const newChar = String.fromCharCode(newCharCode);
+    // const utfOffset = (char.toUpperCase() === char) ? 64 : 96;
+    // const newChar = String.fromCharCode((char.charCodeAt(0)+shift-utfOffset)%26+utfOffset);
     return newChar;
 }
 
